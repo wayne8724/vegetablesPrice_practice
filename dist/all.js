@@ -29,6 +29,9 @@ axios.get(dataUrl)
     // console.log(data);
     //renderdata();  //測試用
 })
+.catch(error => {
+    console.log(error);
+})
 
 //篩選類別
 filterDiv.addEventListener("click",filterBtn);
@@ -38,20 +41,23 @@ function filterBtn(e){
             filterData = data.filter((item) => {
             return item.種類代碼 == "N04";
         })
-        renderdata();
+            renderdata();
+            selectedIndexReset();
         break;
         case "N05":
             filterData = data.filter((item) => {
             return item.種類代碼 == "N05";
         })
-        renderdata();
+            renderdata();
+            selectedIndexReset();
         break;
         case "N06":
             filterData = data.filter((item) => {
                 return item.種類代碼 == "N06";
             })
             renderdata();
-            break;
+            selectedIndexReset();
+            break;    
     }
 }
 
@@ -90,7 +96,7 @@ function search(){
     }else{
         searchResult.textContent = "「" + searchInput.value + "」的搜尋結果為:";
     }
-    searchInput.value = "";
+    selectedIndexReset();
 }
 
 //點選排序選單排序
@@ -138,4 +144,9 @@ function renderdata(){
         ` 
     })
     showList.innerHTML = str ;
+}
+
+function selectedIndexReset(){
+    sortSelect.selectedIndex = 0;
+    searchInput.value = "";
 }
